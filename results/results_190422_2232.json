@@ -1,0 +1,1 @@
+{'data': 'getFashionMNIST', 'loss': 'CrossEntropyLoss', 'optim': 'SGD', 'epoh': 1, 'accuracy': {'Top': 81.5, 'Trouser': 96.4, 'Pullover': 72.5, 'Dress': 83.9, 'Coat': 83.6, 'Sandal': 94.5, 'Shirt': 63.4, 'Sneaker': 96.0, 'Bag': 95.6, 'Ankle boot': 91.6}}

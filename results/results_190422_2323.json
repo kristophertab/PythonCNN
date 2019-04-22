@@ -1,0 +1,1 @@
+{'data': 'STL10', 'loss': 'CrossEntropyLoss', 'optim': 'SGD', 'epoh': 1, 'accuracy': {'airplane': 24.125, 'bird': 21.625, 'car': 3.25, 'cat': 0.0, 'deer': 0.0, 'dog': 0.375, 'horse': 65.5, 'monkey': 0.125, 'ship': 83.375, 'truck': 21.375}}

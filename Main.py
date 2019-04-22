@@ -15,13 +15,13 @@ def imshow(img):
     plt.imshow(np.transpose(npimg, (1, 2, 0)))
     plt.show()
 
-def imFeelingLucky():
+def imFeelingLucky(loader, net):
     #  Selct random images.
     dataiter = iter(loader.train)
     [images, labels] = dataiter.next()
 
     # Neural Network prosess.
-    out = myNet(images)
+    out = net(images)
 
     # Guess lucky anserw
     [dummy , predicted] = torch.max(out, 1)
@@ -36,13 +36,13 @@ def main():
         "data": "",
         "loss": "",
         "optim": "",
-        "epoh": 2,
+        "epoh": 3,
         "accuracy":{ },
     }
 
     loader = DataLoader()
-    loader.getCIFAR10()
-    info["data"] = "CIFAR10"
+    loader.getSTL10()
+    info["data"] = "STL10"
 
     # My Neural Network.
     myNet = TensorfFlowCNN.Net()
@@ -58,7 +58,7 @@ def main():
     # Network Training
     for epoh in range(info["epoh"]):
         local_loss = 0.0
-        for i, data in enumerate(loader.test, 0):
+        for i, data in enumerate(loader.train):
             [input, labels] = data
 
             # ? gradient cleaning. But why?
@@ -76,6 +76,9 @@ def main():
                         (1 + epoh, i + 1, local_loss / 2000))
                 local_loss = 0.0
 
+    # for user, have fun
+    # imFeelingLucky(loader, myNet)
+
     # Network Testing
     class_correct = list(0. for i in range(len(loader.names)))
     class_total = list(0. for i in range(len(loader.names)))
@@ -90,10 +93,8 @@ def main():
                 class_correct[label] += c[i].item()
                 class_total[label] += 1
     
-    i = 0
-    for name in loader.names:
+    for i, name in enumerate(loader.names):
         info["accuracy"].update({name: (100 * class_correct[i] / class_total[i]) })
-        i += 1
 
     # Save results text
     outFile = open(resultFilePath("json"), "w+")
