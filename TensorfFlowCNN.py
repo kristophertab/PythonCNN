@@ -1,6 +1,15 @@
 import torch.nn as nn
 import torch.nn.functional as F
 
+def my_softmax(x):
+    return x - x.exp().sum(-1).log().unsqueeze(-1)
+
+def my_relu(x):
+    return x.clamp(min=0)
+
+def my_liner(x):
+    return x
+
 class Net(nn.Module):
     def __init__(self):
         super(Net, self).__init__()
@@ -15,7 +24,7 @@ class Net(nn.Module):
         x = self.pool(F.relu(self.conv1(x)))
         x = self.pool(F.relu(self.conv2(x)))
         x = x.view(-1, 16 * 5 * 5)
-        x = F.relu(self.fc1(x))
-        x = F.relu(self.fc2(x))
+        x = my_relu(self.fc1(x))
+        x = my_relu(self.fc2(x))
         x = self.fc3(x)
         return x

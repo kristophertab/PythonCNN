@@ -1,0 +1,1 @@
+{'data': 'CIFAR', 'loss': 'CrossEntropyLoss', 'optim': 'SGD', 'epoh': 2, 'activ': 'relu', 'accuracy': {'plane': 61.6, 'car': 56.3, 'bird': 32.7, 'cat': 43.2, 'deer': 45.6, 'dog': 57.1, 'frog': 57.5, 'horse': 57.6, 'ship': 69.9, 'truck': 73.7}}

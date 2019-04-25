@@ -2,12 +2,14 @@ import torch
 import matplotlib.pyplot as plt
 import numpy as np
 import torch.nn as nn
-import TensorfFlowCNN
 import torch.optim as optim
 import datetime
 import matplotlib.pyplot as plt
 from DataLoader import DataLoader
 import torchvision
+
+import TensorfFlowCNN
+import ExperimentalCNN
 
 def imshow(img):
     img = img / 2 + 0.5     # unnormalize
@@ -36,13 +38,14 @@ def main():
         "data": "",
         "loss": "",
         "optim": "",
-        "epoh": 3,
+        "epoh": 2,
+        "activ":"relu",
         "accuracy":{ },
     }
 
     loader = DataLoader()
-    loader.getSTL10()
-    info["data"] = "STL10"
+    loader.getCIFAR10()
+    info["data"] = "CIFAR"
 
     # My Neural Network.
     myNet = TensorfFlowCNN.Net()
@@ -103,17 +106,13 @@ def main():
 
     # Save results image
     plt.bar(*zip(*info["accuracy"].items()))
-    plt.title(info["loss"]+" "+info["optim"])
     plt.ylabel("Accuracy %")
     plt.ylim(0,100)
     plt.savefig(resultFilePath("png"))
 
-
 def resultFilePath(filetype):
     time = datetime.datetime.now().strftime("%y%m%d_%H%M")
     return ("results/results_" + time + "."+filetype)
-
-
 
 if __name__ == "__main__":
     main()
